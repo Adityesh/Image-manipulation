@@ -1,0 +1,14 @@
+.footer {
+    height : 5vh;
+    display: grid;
+    place-items: center;
+    background-color: #DDDDDD;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 3.5min;
+}
+
+.footer-dark {
+    background-color: #313131 !important;
+    color: white;
+}

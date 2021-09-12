@@ -1,0 +1,17 @@
+.button {
+    padding : 1rem 2rem;
+    width: 18vmin;
+    font-size: 3vmin;
+    font-weight: lighter;
+    font-family: sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+
+.button > img {
+    margin-left: 0.3em;
+    height: 1em;
+}

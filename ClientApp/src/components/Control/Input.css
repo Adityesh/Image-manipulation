@@ -1,0 +1,32 @@
+.input-row {
+    max-width: 800px;
+    width: 90%;
+}
+
+.input {
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 2rem;
+  font-size: 3.5vmin;
+  border: 2px solid #FF4C29;
+  transition: all 0.2s linear;
+}
+
+.input-dark {
+  background-color: #525252;
+  color : white
+}
+
+.input-dark::placeholder {
+  color: white;
+}
+
+.input:focus {
+  outline: none;
+  border: 2.5px solid #FF4C29;
+  box-shadow: 1px 7px 10px -9px #FF4C29;
+  -webkit-box-shadow: 1px 7px 10px -9px #FF4C29;
+  -moz-box-shadow: 1px 7px 10px -9px #FF4C29;
+}

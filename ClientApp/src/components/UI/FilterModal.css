@@ -1,0 +1,40 @@
+.filter-modal {
+    position: absolute;
+    height: 90%;
+    width: 85vmin;
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    transition: all .2s linear;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2em;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.filter-modal-dark {
+    background-color: #525252;
+    color: white;
+
+}
+
+.control-row {
+    width : 90%;
+    margin: 0.8em 0;
+}
+
+.control-row > p {
+    margin-bottom: 0.5em;
+}
+
+.image-container {
+    max-width: calc(85vmin - 50%);
+    margin-bottom: 1em;
+    
+}
+
+.preview-image {
+    width: 100%;
+}

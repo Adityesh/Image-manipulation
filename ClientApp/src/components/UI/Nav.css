@@ -1,0 +1,40 @@
+#Nav {
+    height : 10vh;
+    width: 100%;
+    background-color: #DDDDDD;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    transition: all 0.2s linear;
+}
+
+.nav-dark {
+    background-color: #313131 !important;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    justify-content: flex-start;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.7vmin;
+    text-align: center;
+    font-family: sans-serif;
+    transition : all 0.2s linear;
+}
+
+.title-dark {
+    color : white;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    justify-content: flex-end;
+}

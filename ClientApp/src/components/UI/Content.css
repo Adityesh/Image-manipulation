@@ -1,0 +1,56 @@
+.content {
+    height : 85vh;
+    display: flex;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: all .2s linear;
+}
+
+.content-dark {
+    background-color: #414141;
+}
+
+.upload-button {
+    border : 2px solid #FF4C29;
+    transition: all 0.2s linear;
+}
+
+.upload-button-dark {
+    background-color: #FF4C29;
+    color: white;
+}
+
+.search-button {
+    background-color: #FF4C29;
+    transition: all 0.2s linear;
+    border : 2px solid #FF4C29;
+}
+
+.search-button-dark {
+    background-color: #525252;
+    border : 2px solid #FF4C29;
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons > div {
+    margin : 2rem 0.5rem;
+}
+
+.filter-button {
+    border: 2px solid black;
+    color:#FF4C29;
+}
+
+.filter-button-dark {
+    color:black;
+    border: 2px solid white;
+}
