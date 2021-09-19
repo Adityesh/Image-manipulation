@@ -38,3 +38,41 @@
 .preview-image {
     width: 100%;
 }
+
+.close-button {
+    color: black;
+    border: 2px solid black;
+    font-size: 2.5vmin;
+    transition: all 0.2s linear;
+    padding: 1vmin;
+    margin: 0 1em;
+}
+
+.close-button-dark {
+    border: 2px solid white;
+    color: white;
+}
+
+.save-button {
+    margin: 0 1em;
+    padding: 1vmin;
+    transition: all 0.2s linear;
+    font-size: 2.5vmin;
+    border: 2px solid green;
+    color: green;
+}
+
+.save-button-dark {
+    color: white;
+    background-color: green;
+    border: 2px solid white;
+}
+
+.filter-modal-footer {
+
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: center;
+
+}

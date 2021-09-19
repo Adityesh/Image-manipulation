@@ -10,5 +10,9 @@ export default configureStore({
         image : ImageReducer,
         posts : PostsReducer
     },
+    middleware : (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 

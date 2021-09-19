@@ -5,7 +5,7 @@ const Footer = () => {
     const isDark = useSelector(state => state.theme.isDark);
     return (
         <div className={`footer ${isDark && 'footer-dark'}`}>
-            Footer Component
+            Made by <a rel="noopener noreferrer" target="_blank" style={{ textDecoration : 'none', color : "#FF4C29"}} href="https://github.com/Adityesh">Adityesh</a>
         </div>
     )
 };

@@ -8,8 +8,11 @@ export const imageSlice = createSlice({
         imageSize : 0,
         imageHeight : 0,
         imageWidth : 0,
+        imageExtension : '',
         image : null,
-        error : ""
+        imageUrl : "",
+        error : "",
+        filters : null
     },
     reducers : {
         toggleLoading : state => {
@@ -20,7 +23,18 @@ export const imageSlice = createSlice({
         },
         setLoadingOff : state => {
             state.isLoading = false;
-        }
+        },
+        setFilters : (state, action) => {
+            state.filters = action.payload;
+        },
+        setImageUrl : (state, action) => {
+            state.imageUrl = action.payload.imageUrl;
+            state.imageExtension = action.payload.extension;
+        },
+        setImage : (state, action) => {
+            const { extension } = action.payload;
+            state.imageExtension = extension;
+        },
     },
     extraReducers : {
         [GetResizedImage.pending] : (state, action) => {
@@ -37,6 +51,6 @@ export const imageSlice = createSlice({
     }
 });
 
-export const { toggleLoading, setLoadingOff, setLoadingOn } = imageSlice.actions;
+export const { toggleLoading, setLoadingOff, setLoadingOn, setFilters, setImage, setImageUrl } = imageSlice.actions;
 
 export default imageSlice.reducer;

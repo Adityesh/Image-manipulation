@@ -80,68 +80,62 @@ namespace image_search.Repository
             }
         }
 
-        internal void ResizeAndApplyFilter(ref Image image, int? NewHeight, int? NewWidth, Filters filters, float? ReducePercentage)
+        internal void ResizeAndApplyFilter(ref Image image, Filters filters)
         {
-            int ReduceHeight = 0;
-            int ReduceWidth = 0;
-            if (ReducePercentage != null)
+            try
             {
-                // Reduce image by the percentage
-                ReduceHeight = (int)(image.Height * ReducePercentage.Value);
-                ReduceWidth = (int)(image.Width * ReducePercentage.Value);
+                int Width = image.Width;
+                int Height = image.Height;
+                // Brightness can be between 0 and 1
+                // Contrast can be between 0 and 1
+                // Grayscale, Sepia,  Opacity between 0 and 1
+                // Pixelate can be any int
+                image.Mutate(x =>
+                {
+
+
+                    if (filters == null) return;
+
+                    if (filters.Resolution != null)
+                    {
+                        x.Resize((int)Math.Floor(Width * filters.Resolution.Value), (int)Math.Floor(Height * filters.Resolution.Value));
+                    }
+
+                    if (filters.Brightness != null)
+                    {
+                        x.Brightness(filters.Brightness.Value);
+                    }
+
+                    if (filters.Contrast != null)
+                    {
+                        x.Contrast(filters.Contrast.Value);
+                    }
+
+                    if (filters.Opacity != null)
+                    {
+                        x.Opacity(filters.Opacity.Value);
+                    }
+
+                    if (filters.Sepia != null)
+                    {
+                        x.Sepia(filters.Sepia.Value);
+                    }
+
+                    if (filters.Pixelate != null && filters.Pixelate > 0)
+                    {
+                        x.Pixelate(filters.Pixelate.Value);
+                    }
+
+                    if (filters.Grayscale != null)
+                    {
+                        x.Grayscale(filters.Grayscale.Value);
+                    }
+                });
             }
-
-            if (NewHeight != null && NewWidth != null)
+            catch (Exception ex)
             {
-                // Reduce image by the given dimensions
-                ReduceHeight = NewHeight.Value;
-                ReduceWidth = NewWidth.Value;
+                return;
             }
-
-            // Brightness can be between 0 and 1
-            // Contrast can be between 0 and 1
-            // Grayscale, Sepia,  Opacity between 0 and 1
-            // Pixelate can be any int
-            image.Mutate(x =>
-            {
-                x.Resize(ReduceWidth, ReduceHeight);
-
-                if (filters == null) return;
-
-                if (filters.Brightness != null)
-                {
-                    x.Brightness(filters.Brightness.Value);
-                }
-
-                if (filters.Contrast != null)
-                {
-                    x.Contrast(filters.Contrast.Value);
-                }
-
-                if (filters.Opacity != null)
-                {
-                    x.Opacity(filters.Opacity.Value);
-                }
-
-                if (filters.Sepia != null)
-                {
-                    x.Sepia(filters.Sepia.Value);
-                }
-
-                if (filters.Pixelate != null)
-                {
-                    x.Pixelate(filters.Pixelate.Value);
-                }
-
-                if (filters.Grayscale != null)
-                {
-                    x.Grayscale(filters.Grayscale.Value);
-                }
-
-
-
-
-            });
         }
 
         public async Task<ResponseImageModel> ResizeImage(ResizeImageModel model)
@@ -156,12 +150,11 @@ namespace image_search.Repository
 
             Image image = await Image.LoadAsync(pathToFile);
 
-            int ReduceHeight = 0;
-            int ReduceWidth = 0;
+            var guid = Guid.NewGuid();
+            var filename = guid + "." + model.Extension;
+            var pathToNewFile = _webHostEnvironment.ContentRootPath + "/Image/" + filename;
 
-            var pathToNewFile = _webHostEnvironment.ContentRootPath + "/Image/" + Guid.NewGuid() + "." + model.Extension;
-
-            ResizeAndApplyFilter(ref image, model.NewHeight, model.NewWidth, model.Filters, model.ReducePercentage);
+            ResizeAndApplyFilter(ref image, model.Filters);
 
             await image.SaveAsync(pathToNewFile);
             byte[] file = await System.IO.File.ReadAllBytesAsync(pathToNewFile);
@@ -171,14 +164,23 @@ namespace image_search.Repository
                     pathToFile,
                     pathToNewFile
                 });
-            image.Dispose();
-            return new ResponseImageModel
+            
+
+            int Height = model.Filters.Resolution == null ? image.Height : (int)Math.Floor(image.Width * model.Filters.Resolution.Value);
+            int Width = model.Filters.Resolution == null ? image.Width : (int)Math.Floor(image.Width * model.Filters.Resolution.Value);
+
+            var result =  new ResponseImageModel
             {
-                Height = ReduceHeight,
-                Width = ReduceWidth,
+                Height = Height, 
+                Width = Width,
                 Size = file.Length,
-                Image = file
+                Image = file,
+                Name = filename
             };
+
+            image.Dispose();
+
+            return result;
 
 
         }
@@ -193,14 +195,12 @@ namespace image_search.Repository
 
             // Image was saved
             Image image = await Image.LoadAsync(pathToFile);
-            
-            int ReduceHeight = 0;
-            int ReduceWidth = 0;
 
 
-            var pathToNewFile = _webHostEnvironment.ContentRootPath + "/Image/" + Guid.NewGuid() + "." + model.Extension;
-
-            ResizeAndApplyFilter(ref image, model.NewHeight, model.NewWidth, model.Filters, model.ReducePercentage);
+            var guid = Guid.NewGuid();
+            var filename = guid + "." + model.Extension;
+            var pathToNewFile = _webHostEnvironment.ContentRootPath + "/Image/" + filename;
+            ResizeAndApplyFilter(ref image, model.Filters);
 
 
             await image.SaveAsync(pathToNewFile);
@@ -211,14 +211,22 @@ namespace image_search.Repository
                     pathToFile,
                     pathToNewFile
                 });
-            image.Dispose();
-            return new ResponseImageModel
+
+            int Height = model.Filters.Resolution == null ? image.Height : (int)Math.Floor(image.Width * model.Filters.Resolution.Value);
+            int Width = model.Filters.Resolution == null ? image.Width : (int)Math.Floor(image.Width * model.Filters.Resolution.Value);
+
+            var result =  new ResponseImageModel
             {
-                Height = ReduceHeight,
-                Width = ReduceWidth,
+                Height = Height, 
+                Width = Width,
                 Size = file.Length,
-                Image = file
+                Image = file,
+                Name = filename
             };
+
+            image.Dispose();
+
+            return result;
 
         }
     }

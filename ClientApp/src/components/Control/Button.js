@@ -15,13 +15,13 @@ const Button = ({ className, text, onClick, iconSrc, animate }) => {
           onClick={onClick}
         >
           <span>{text}</span>
-          <img src={iconSrc} />
+          <img src={iconSrc} alt="icon-pic"/>
         </motion.div>
         </AnimatePresence>
       ) : (
         <div className={`button ${className}`} onClick={onClick}>
           <span>{text}</span>
-          <img src={iconSrc} />
+          <img src={iconSrc} alt="icon-pic"/>
         </div>
       )}
     </AnimatePresence>

@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Http;
 namespace image_search.Models {
     public class ResizeImageModel {
 
-        public float? ReducePercentage { get; set; }
-        public int? NewHeight {get; set;}
-        public int? NewWidth {get; set;}
         public Filters Filters { get; set; }
         public string Extension { get; set; }
         public IFormFile Image {get; set;}
@@ -18,6 +15,7 @@ namespace image_search.Models {
         public float? Grayscale { get; set; }
         public float? Sepia { get; set; }
         public int? Pixelate { get; set; }
+        public float? Resolution { get; set; }
 
 
     }

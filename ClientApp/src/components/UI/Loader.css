@@ -1,0 +1,50 @@
+.loader {
+    position: absolute;
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+    top: 10vh;
+    background-color: whitesmoke;
+    transition: all 0.2s linear;
+}
+
+.loader-dark {
+    background-color: rgb(110, 110, 110);
+    position: absolute;
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+    top: 10vh;
+    transition: all 0.2s linear;
+}
+
+.load-img {
+    height: 150px;
+    aspect-ratio: 1/1;
+}
+
+.p {
+    position: absolute;
+    font-family: sans-serif;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: bold;
+    transform: translate(43px, 68px);
+    height: 150px;
+    width: 150px;
+    transition: all 0.2s linear;
+}
+
+.dark-p {
+    color: white;
+}

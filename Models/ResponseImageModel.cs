@@ -4,6 +4,7 @@ namespace image_search.Models {
         public int Width { get; set; }
         public byte[] Image { get; set; }
         public int Size { get; set; }
+        public string Name { get; set; }
 
         
     }

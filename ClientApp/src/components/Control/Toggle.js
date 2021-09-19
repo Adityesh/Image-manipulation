@@ -13,8 +13,8 @@ const Toggle = ({checked, toggleChecked}) => {
             <label className="switch">
                 <input type="checkbox" checked={checked} onChange={handleChange}/>
                 <span className="slider round"></span>
-                <img className="moon" src={moon} />
-                <img src={sun} className="sun" />
+                <img className="moon" src={moon} alt="moon-pic"/>
+                <img src={sun} className="sun" alt="sun-pic"/>
 
             </label>
     )
